@@ -1,0 +1,58 @@
+D:\ihulu\One Drive\OneDrive\Masaüstü\Yazılım\superlig\superlig\bin\Debug\net8.0-windows\superlig.exe
+D:\ihulu\One Drive\OneDrive\Masaüstü\Yazılım\superlig\superlig\bin\Debug\net8.0-windows\superlig.deps.json
+D:\ihulu\One Drive\OneDrive\Masaüstü\Yazılım\superlig\superlig\bin\Debug\net8.0-windows\superlig.runtimeconfig.json
+D:\ihulu\One Drive\OneDrive\Masaüstü\Yazılım\superlig\superlig\bin\Debug\net8.0-windows\superlig.dll
+D:\ihulu\One Drive\OneDrive\Masaüstü\Yazılım\superlig\superlig\bin\Debug\net8.0-windows\superlig.pdb
+D:\ihulu\One Drive\OneDrive\Masaüstü\Yazılım\superlig\superlig\obj\Debug\net8.0-windows\superlig.Form1.resources
+D:\ihulu\One Drive\OneDrive\Masaüstü\Yazılım\superlig\superlig\obj\Debug\net8.0-windows\superlig.csproj.GenerateResource.cache
+D:\ihulu\One Drive\OneDrive\Masaüstü\Yazılım\superlig\superlig\obj\Debug\net8.0-windows\superlig.GeneratedMSBuildEditorConfig.editorconfig
+D:\ihulu\One Drive\OneDrive\Masaüstü\Yazılım\superlig\superlig\obj\Debug\net8.0-windows\superlig.AssemblyInfoInputs.cache
+D:\ihulu\One Drive\OneDrive\Masaüstü\Yazılım\superlig\superlig\obj\Debug\net8.0-windows\superlig.AssemblyInfo.cs
+D:\ihulu\One Drive\OneDrive\Masaüstü\Yazılım\superlig\superlig\obj\Debug\net8.0-windows\superlig.csproj.CoreCompileInputs.cache
+D:\ihulu\One Drive\OneDrive\Masaüstü\Yazılım\superlig\superlig\obj\Debug\net8.0-windows\superlig.dll
+D:\ihulu\One Drive\OneDrive\Masaüstü\Yazılım\superlig\superlig\obj\Debug\net8.0-windows\refint\superlig.dll
+D:\ihulu\One Drive\OneDrive\Masaüstü\Yazılım\superlig\superlig\obj\Debug\net8.0-windows\superlig.pdb
+D:\ihulu\One Drive\OneDrive\Masaüstü\Yazılım\superlig\superlig\obj\Debug\net8.0-windows\superlig.genruntimeconfig.cache
+D:\ihulu\One Drive\OneDrive\Masaüstü\Yazılım\superlig\superlig\obj\Debug\net8.0-windows\ref\superlig.dll
+C:\Users\gen_c\OneDrive\Masaüstü\superlig\superlig\obj\Debug\net8.0-windows\superlig.dll
+C:\Users\gen_c\OneDrive\Masaüstü\superlig\superlig\obj\Debug\net8.0-windows\refint\superlig.dll
+C:\Users\gen_c\OneDrive\Masaüstü\superlig\superlig\obj\Debug\net8.0-windows\superlig.pdb
+C:\Users\gen_c\OneDrive\Masaüstü\superlig\superlig\obj\Debug\net8.0-windows\superlig.Form1.resources
+C:\Users\gen_c\OneDrive\Masaüstü\superlig\superlig\obj\Debug\net8.0-windows\superlig.csproj.GenerateResource.cache
+C:\Users\gen_c\OneDrive\Masaüstü\superlig\superlig\obj\Debug\net8.0-windows\superlig.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\gen_c\OneDrive\Masaüstü\superlig\superlig\obj\Debug\net8.0-windows\superlig.AssemblyInfoInputs.cache
+C:\Users\gen_c\OneDrive\Masaüstü\superlig\superlig\obj\Debug\net8.0-windows\superlig.AssemblyInfo.cs
+C:\Users\gen_c\OneDrive\Masaüstü\superlig\superlig\obj\Debug\net8.0-windows\superlig.csproj.CoreCompileInputs.cache
+C:\Users\gen_c\OneDrive\Masaüstü\superlig\superlig\obj\Debug\net8.0-windows\superlig.csproj.AssemblyReference.cache
+C:\Users\gen_c\OneDrive\Masaüstü\superlig\superlig\bin\Debug\net8.0-windows\superlig.exe
+C:\Users\gen_c\OneDrive\Masaüstü\superlig\superlig\bin\Debug\net8.0-windows\superlig.deps.json
+C:\Users\gen_c\OneDrive\Masaüstü\superlig\superlig\bin\Debug\net8.0-windows\superlig.runtimeconfig.json
+C:\Users\gen_c\OneDrive\Masaüstü\superlig\superlig\bin\Debug\net8.0-windows\superlig.dll
+C:\Users\gen_c\OneDrive\Masaüstü\superlig\superlig\bin\Debug\net8.0-windows\superlig.pdb
+C:\Users\gen_c\OneDrive\Masaüstü\superlig\superlig\bin\Debug\net8.0-windows\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\gen_c\OneDrive\Masaüstü\superlig\superlig\bin\Debug\net8.0-windows\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\gen_c\OneDrive\Masaüstü\superlig\superlig\bin\Debug\net8.0-windows\Npgsql.dll
+C:\Users\gen_c\OneDrive\Masaüstü\superlig\superlig\obj\Debug\net8.0-windows\superlig.csproj.Up2Date
+C:\Users\gen_c\OneDrive\Masaüstü\superlig\superlig\obj\Debug\net8.0-windows\superlig.genruntimeconfig.cache
+C:\Users\gen_c\OneDrive\Masaüstü\superlig\superlig\obj\Debug\net8.0-windows\ref\superlig.dll
+d:\ihulu\One Drive\OneDrive\Masaüstü\superlig (4)\superlig\superlig\bin\Debug\net8.0-windows\superlig.exe
+d:\ihulu\One Drive\OneDrive\Masaüstü\superlig (4)\superlig\superlig\bin\Debug\net8.0-windows\superlig.deps.json
+d:\ihulu\One Drive\OneDrive\Masaüstü\superlig (4)\superlig\superlig\bin\Debug\net8.0-windows\superlig.runtimeconfig.json
+d:\ihulu\One Drive\OneDrive\Masaüstü\superlig (4)\superlig\superlig\bin\Debug\net8.0-windows\superlig.dll
+d:\ihulu\One Drive\OneDrive\Masaüstü\superlig (4)\superlig\superlig\bin\Debug\net8.0-windows\superlig.pdb
+d:\ihulu\One Drive\OneDrive\Masaüstü\superlig (4)\superlig\superlig\bin\Debug\net8.0-windows\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+d:\ihulu\One Drive\OneDrive\Masaüstü\superlig (4)\superlig\superlig\bin\Debug\net8.0-windows\Microsoft.Extensions.Logging.Abstractions.dll
+d:\ihulu\One Drive\OneDrive\Masaüstü\superlig (4)\superlig\superlig\bin\Debug\net8.0-windows\Npgsql.dll
+d:\ihulu\One Drive\OneDrive\Masaüstü\superlig (4)\superlig\superlig\obj\Debug\net8.0-windows\superlig.csproj.AssemblyReference.cache
+d:\ihulu\One Drive\OneDrive\Masaüstü\superlig (4)\superlig\superlig\obj\Debug\net8.0-windows\superlig.Form1.resources
+d:\ihulu\One Drive\OneDrive\Masaüstü\superlig (4)\superlig\superlig\obj\Debug\net8.0-windows\superlig.csproj.GenerateResource.cache
+d:\ihulu\One Drive\OneDrive\Masaüstü\superlig (4)\superlig\superlig\obj\Debug\net8.0-windows\superlig.GeneratedMSBuildEditorConfig.editorconfig
+d:\ihulu\One Drive\OneDrive\Masaüstü\superlig (4)\superlig\superlig\obj\Debug\net8.0-windows\superlig.AssemblyInfoInputs.cache
+d:\ihulu\One Drive\OneDrive\Masaüstü\superlig (4)\superlig\superlig\obj\Debug\net8.0-windows\superlig.AssemblyInfo.cs
+d:\ihulu\One Drive\OneDrive\Masaüstü\superlig (4)\superlig\superlig\obj\Debug\net8.0-windows\superlig.csproj.CoreCompileInputs.cache
+d:\ihulu\One Drive\OneDrive\Masaüstü\superlig (4)\superlig\superlig\obj\Debug\net8.0-windows\superlig.csproj.Up2Date
+d:\ihulu\One Drive\OneDrive\Masaüstü\superlig (4)\superlig\superlig\obj\Debug\net8.0-windows\superlig.dll
+d:\ihulu\One Drive\OneDrive\Masaüstü\superlig (4)\superlig\superlig\obj\Debug\net8.0-windows\refint\superlig.dll
+d:\ihulu\One Drive\OneDrive\Masaüstü\superlig (4)\superlig\superlig\obj\Debug\net8.0-windows\superlig.pdb
+d:\ihulu\One Drive\OneDrive\Masaüstü\superlig (4)\superlig\superlig\obj\Debug\net8.0-windows\superlig.genruntimeconfig.cache
+d:\ihulu\One Drive\OneDrive\Masaüstü\superlig (4)\superlig\superlig\obj\Debug\net8.0-windows\ref\superlig.dll

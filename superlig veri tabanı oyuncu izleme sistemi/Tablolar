@@ -1,0 +1,144 @@
+-- Kişi Tablosu
+CREATE TABLE kisi (
+    kisi_id SERIAL PRIMARY KEY,
+    ad VARCHAR(30) NOT NULL,
+    soyad VARCHAR(30) NOT NULL,
+    dogum_tarihi DATE,
+    rol VARCHAR(20) CHECK (rol IN ('Oyuncu', 'Teknik Direktör', 'Hakem', 'Başkan'))
+);
+
+-- Takım Tablosu
+CREATE TABLE takim (
+    takim_id SERIAL PRIMARY KEY,
+    takim_adi VARCHAR(50) NOT NULL,
+    kurulus_tarihi DATE,
+    kısaltma VARCHAR(30),
+    sehir VARCHAR(30),
+    baskan_id INT REFERENCES kisi(kisi_id) ON DELETE CASCADE, -- Başkan bilgisi
+    teknik_direktor_id INT REFERENCES kisi(kisi_id) ON DELETE CASCADE -- Teknik direktör bilgisi
+);
+
+-- Pozisyon Tablosu
+CREATE TABLE pozisyon (
+    pozisyon_id SERIAL PRIMARY KEY,
+    pozisyon_adi VARCHAR(20) NOT NULL UNIQUE -- Örnek: 'Hücum', 'Orta Saha', 'Defans'
+);
+
+-- Oyuncu Tablosu
+CREATE TABLE oyuncu (
+    oyuncu_id SERIAL PRIMARY KEY,
+    kisi_id INT REFERENCES kisi(kisi_id) ON DELETE CASCADE, -- Kişiye ait oyuncu verileri silinsin
+    pozisyon_id INT REFERENCES pozisyon(pozisyon_id) ON DELETE CASCADE, -- Pozisyon silinirse oyuncu da silinsin
+    takim_id INT REFERENCES takim(takim_id) ON DELETE CASCADE -- Takım silinirse oyuncu da silinsin
+);
+
+-- Teknik Direktör Tablosu (Opsiyonel, Veritabanı Yedek İçin)
+CREATE TABLE teknik_direktor (
+    td_id SERIAL PRIMARY KEY,
+    kisi_id INT REFERENCES kisi(kisi_id) ON DELETE CASCADE, -- Teknik Direktör kişisi silindiğinde
+    takim_id INT REFERENCES takim(takim_id) ON DELETE CASCADE -- Teknik Direktörün takımı silindiğinde
+);
+
+-- Başkan Tablosu (Opsiyonel, Veritabanı Yedek İçin)
+CREATE TABLE baskan (
+    baskan_id SERIAL PRIMARY KEY,
+    kisi_id INT REFERENCES kisi(kisi_id) ON DELETE CASCADE, -- Başkan kişisi silindiğinde
+    takim_id INT REFERENCES takim(takim_id) ON DELETE CASCADE, -- Başkanın takımı silindiğinde
+    gorev_baslangic_tarihi DATE
+);
+
+-- Hakem Tablosu
+CREATE TABLE hakem (
+    hakem_id SERIAL PRIMARY KEY,
+    kisi_id INT REFERENCES kisi(kisi_id) ON DELETE CASCADE, -- Hakem kişisi silindiğinde
+    tecrube_yili INT
+);
+
+-- Stadyum Tablosu
+CREATE TABLE stadyum (
+    stadyum_id SERIAL PRIMARY KEY,
+    ad VARCHAR(50),
+    kapasite INT,
+    takim_id INT REFERENCES takim(takim_id) ON DELETE CASCADE, -- Takım silindiğinde stadyum da silinsin
+    sehir VARCHAR(30)
+);
+
+-- Maç Tablosu
+CREATE TABLE mac (
+    mac_id SERIAL PRIMARY KEY,
+    ev_sahibi_takim_id INT REFERENCES takim(takim_id) ON DELETE CASCADE, -- Takım silindiğinde maç da silinsin
+    deplasman_takim_id INT REFERENCES takim(takim_id) ON DELETE CASCADE, -- Takım silindiğinde maç da silinsin
+    hakem_id INT REFERENCES hakem(hakem_id) ON DELETE CASCADE, -- Hakem silindiğinde maç da silinsin
+    stadyum_id INT REFERENCES stadyum(stadyum_id) ON DELETE CASCADE, -- Stadyum silindiğinde maç da silinsin
+    mac_tarihi DATE NOT NULL,
+    skor VARCHAR(10)
+);
+
+-- Oyuncu İstatistik Tablosu
+CREATE TABLE oyuncu_istatistik (
+    istatistik_id SERIAL PRIMARY KEY,
+    oyuncu_id INT REFERENCES oyuncu(oyuncu_id) ON DELETE CASCADE, -- Oyuncu silindiğinde istatistikler de silinsin
+    mac_id INT REFERENCES mac(mac_id) ON DELETE CASCADE, -- Maç silindiğinde istatistikler de silinsin
+    gol_sayisi INT DEFAULT 0,
+    asist_sayisi INT DEFAULT 0,
+    kart_sayisi INT DEFAULT 0
+);
+
+-- Gol Tablosu
+CREATE TABLE gol (
+    gol_id SERIAL PRIMARY KEY,
+    oyuncu_id INT REFERENCES oyuncu(oyuncu_id) ON DELETE CASCADE, -- Oyuncu silindiğinde gol verisi de silinsin
+    mac_id INT REFERENCES mac(mac_id) ON DELETE CASCADE, -- Maç silindiğinde gol verisi de silinsin
+    dakika INT
+);
+
+-- Kart Tablosu
+CREATE TABLE kart (
+    kart_id SERIAL PRIMARY KEY,
+    oyuncu_id INT REFERENCES oyuncu(oyuncu_id) ON DELETE CASCADE, -- Oyuncu silindiğinde kart verisi de silinsin
+    mac_id INT REFERENCES mac(mac_id) ON DELETE CASCADE, -- Maç silindiğinde kart verisi de silinsin
+    kart_turu VARCHAR(10), -- Sarı veya Kırmızı
+    dakika INT
+);
+
+-- Ceza Tablosu
+CREATE TABLE ceza (
+    ceza_id SERIAL PRIMARY KEY,
+    oyuncu_id INT REFERENCES oyuncu(oyuncu_id) ON DELETE CASCADE, -- Oyuncu silindiğinde ceza verisi de silinsin
+    mac_id INT REFERENCES mac(mac_id) ON DELETE CASCADE, -- Maç silindiğinde ceza verisi de silinsin
+    ceza_suresi INT -- dakika cinsinden
+);
+
+-- Taraftar Grubu Tablosu
+CREATE TABLE taraftar_grubu (
+    grup_id SERIAL PRIMARY KEY,
+    grup_adi VARCHAR(50),
+    takim_id INT REFERENCES takim(takim_id) ON DELETE CASCADE, -- Takım silindiğinde taraftar grubu da silinsin
+    uye_sayisi INT
+);
+
+-- Transfer Tablosu
+CREATE TABLE transfer (
+    transfer_id SERIAL PRIMARY KEY,
+    oyuncu_id INT REFERENCES oyuncu(oyuncu_id) ON DELETE CASCADE, -- Oyuncu silindiğinde transfer verisi de silinsin
+    eski_takim_id INT REFERENCES takim(takim_id) ON DELETE CASCADE, -- Takım silindiğinde transfer verisi de silinsin
+    yeni_takim_id INT REFERENCES takim(takim_id) ON DELETE CASCADE -- Takım silindiğinde transfer verisi de silinsin
+);
+
+-- Maaş Tablosu
+CREATE TABLE maas (
+    maas_id SERIAL PRIMARY KEY,
+    kisi_id INT REFERENCES kisi(kisi_id) ON DELETE CASCADE, -- Kişi silindiğinde maaş verisi de silinsin
+    maas DECIMAL(12,2) NOT NULL
+);
+
+-- Lig Tablosu
+CREATE TABLE ligtablosu (
+    takim_id INT PRIMARY KEY REFERENCES takim(takim_id) ON DELETE CASCADE, -- Takım silindiğinde lig tablosu da silinsin
+    galibiyet INT DEFAULT 0,
+    beraberlik INT DEFAULT 0,
+    maglubiyet INT DEFAULT 0,
+    attigi_gol INT DEFAULT 0,
+    yedigi_gol INT DEFAULT 0,
+    puan INT
+);

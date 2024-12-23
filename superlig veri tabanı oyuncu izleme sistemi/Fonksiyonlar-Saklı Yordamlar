@@ -1,0 +1,142 @@
+
+DECLARE
+    gol_farki INT; -- Declare the variable to store goal difference
+BEGIN
+    -- Calculate goal difference: scored goals - conceded goals
+    SELECT (SUM(oi.attigi_gol) - SUM(oi.yedigi_gol))
+    INTO gol_farki
+    FROM oyuncu_istatistik oi
+    JOIN mac m ON oi.mac_id = m.mac_id
+    WHERE m.ev_sahibi_takim_id = takim_id OR m.deplasman_takim_id = takim_id;
+
+    -- Return the calculated goal difference
+    RETURN gol_farki;
+END;
+
+
+
+BEGIN
+    RETURN QUERY
+    SELECT m.mac_id, oi.gol_sayisi, oi.asist_sayisi, oi.kart_sayisi
+    FROM oyuncu_istatistik oi
+    JOIN mac m ON oi.mac_id = m.mac_id
+    WHERE oi.oyuncu_id = oyuncu_id;
+END;
+
+
+
+BEGIN
+    RETURN QUERY
+    SELECT 
+        o.oyuncu_id, 
+        k.ad, 
+        k.soyad, 
+        et.takim_adi AS eski_takim_adi, 
+        yt.takim_adi AS yeni_takim_adi, 
+        tr.transfer_tarihi
+    FROM transfer tr
+    JOIN oyuncu o ON tr.oyuncu_id = o.oyuncu_id
+    JOIN kisi k ON o.kisi_id = k.kisi_id
+    JOIN takim et ON tr.eski_takim_id = et.takim_id
+    JOIN takim yt ON tr.yeni_takim_id = yt.takim_id
+    WHERE tr.yeni_takim_id = takim_id OR tr.eski_takim_id = takim_id
+    ORDER BY tr.transfer_tarihi DESC;
+END;
+
+
+
+
+BEGIN
+    -- Transferi işleme
+    INSERT INTO transfer(oyuncu_id, eski_takim_id, yeni_takim_id)
+    VALUES (oyuncu_id, eski_takim_id, yeni_takim_id);
+
+    -- Oyuncuyu yeni takıma atama
+    UPDATE oyuncu
+    SET takim_id = yeni_takim_id
+    WHERE oyuncu_id = oyuncu_id;
+END;
+
+
+
+
+
+BEGIN
+    -- En çok gol atılan maçı ekrana yazdır
+    RAISE NOTICE 'En Gollü Maç: % - % (Toplam Gol: %)',
+        (SELECT t1.takim_adi
+         FROM mac m
+         JOIN takim t1 ON m.ev_sahibi_takim_id = t1.takim_id
+         GROUP BY m.mac_id, t1.takim_adi
+         ORDER BY SUM(CAST(SPLIT_PART(m.skor, '-', 1) AS INT) + CAST(SPLIT_PART(m.skor, '-', 2) AS INT)) DESC
+         LIMIT 1),
+        (SELECT t2.takim_adi
+         FROM mac m
+         JOIN takim t2 ON m.deplasman_takim_id = t2.takim_id
+         GROUP BY m.mac_id, t2.takim_adi
+         ORDER BY SUM(CAST(SPLIT_PART(m.skor, '-', 1) AS INT) + CAST(SPLIT_PART(m.skor, '-', 2) AS INT)) DESC
+         LIMIT 1),
+        (SELECT SUM(CAST(SPLIT_PART(m.skor, '-', 1) AS INT) + CAST(SPLIT_PART(m.skor, '-', 2) AS INT))
+         FROM mac m
+         ORDER BY SUM(CAST(SPLIT_PART(m.skor, '-', 1) AS INT) + CAST(SPLIT_PART(m.skor, '-', 2) AS INT)) DESC
+         LIMIT 1);
+END;
+
+
+
+
+DECLARE
+    toplam_gol INT;
+    siralama INT;
+BEGIN
+    -- Toplam gol sayısını hesapla
+    SELECT SUM(oi.gol_sayisi) INTO toplam_gol
+    FROM oyuncu_istatistik oi
+    WHERE oi.oyuncu_id = _oyuncu_id;
+
+    -- Sıralamayı bul
+    SELECT COUNT(*) + 1 INTO siralama
+    FROM (
+        SELECT SUM(oi.gol_sayisi) AS toplam_gol
+        FROM oyuncu_istatistik oi
+        GROUP BY oi.oyuncu_id
+        HAVING SUM(oi.gol_sayisi) > toplam_gol
+    ) AS gol_siralamasi;
+
+    -- Sonucu ekrana yazdır
+    RAISE NOTICE 'Oyuncu ID %: Toplam Gol: %, Sıralama: %', _oyuncu_id, toplam_gol, siralama;
+END;
+
+
+
+CREATE OR REPLACE PROCEDURE takim_gol_ortalamasi_hesapla(_takim_id INT)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+    toplam_gol INT;
+    mac_sayisi INT;
+    ortalama NUMERIC;
+BEGIN
+    -- Toplam gol ve maç sayısını hesapla
+    SELECT SUM(oi.gol_sayisi) INTO toplam_gol
+    FROM oyuncu_istatistik oi
+    JOIN oyuncu o ON oi.oyuncu_id = o.oyuncu_id
+    WHERE o.takim_id = _takim_id;
+
+    SELECT COUNT(*) INTO mac_sayisi
+    FROM mac
+    WHERE ev_sahibi_takim_id = _takim_id OR deplasman_takim_id = _takim_id;
+
+    -- Ortalama hesapla
+    IF mac_sayisi = 0 THEN
+        ortalama := 0;
+    ELSE
+        ortalama := toplam_gol::NUMERIC / mac_sayisi;
+    END IF;
+
+    -- Sonuç ekrana yazdır
+    RAISE NOTICE 'Takım ID %: Maç Başı Gol Ortalaması: %', _takim_id, ortalama;
+END;
+$$;
+
+

@@ -1,0 +1,67 @@
+
+BEGIN
+    UPDATE oyuncu_istatistik
+    SET kart_sayisi = kart_sayisi + 1 -- Ceza da kartla ilişkili olduğu için kart sayısını artırabiliriz
+    WHERE oyuncu_id = NEW.oyuncu_id AND mac_id = NEW.mac_id;
+    RETURN NEW;
+END;
+
+
+
+BEGIN
+    UPDATE oyuncu_istatistik
+    SET gol_sayisi = gol_sayisi + 1
+    WHERE oyuncu_id = NEW.oyuncu_id AND mac_id = NEW.mac_id;
+    RETURN NEW;
+END;
+
+
+
+
+BEGIN
+    IF NEW.SKOR IS NOT NULL THEN
+        -- Skor verilerini parçalayıp galibiyet, beraberlik, mağlubiyet, gol ve puan hesaplama
+        DECLARE
+            ev_sahibi_gol INT;
+            deplasman_gol INT;
+        BEGIN
+            ev_sahibi_gol := split_part(NEW.SKOR, '-', 1)::INT;
+            deplasman_gol := split_part(NEW.SKOR, '-', 2)::INT;
+
+            -- Ev sahibi takımın puanını güncelleme
+            IF ev_sahibi_gol > deplasman_gol THEN
+                UPDATE ligtablosu
+                SET galibiyet = galibiyet + 1, puan = puan + 3
+                WHERE takim_id = NEW.ev_sahibi_takim_id;
+                UPDATE ligtablosu
+                SET maglubiyet = maglubiyet + 1
+                WHERE takim_id = NEW.deplasman_takim_id;
+            ELSIF ev_sahibi_gol < deplasman_gol THEN
+                UPDATE ligtablosu
+                SET galibiyet = galibiyet + 1, puan = puan + 3
+                WHERE takim_id = NEW.deplasman_takim_id;
+                UPDATE ligtablosu
+                SET maglubiyet = maglubiyet + 1
+                WHERE takim_id = NEW.ev_sahibi_takim_id;
+            ELSE
+                UPDATE ligtablosu
+                SET beraberlik = beraberlik + 1, puan = puan + 1
+                WHERE takim_id = NEW.ev_sahibi_takim_id;
+                UPDATE ligtablosu
+                SET beraberlik = beraberlik + 1, puan = puan + 1
+                WHERE takim_id = NEW.deplasman_takim_id;
+            END IF;
+        END;
+    END IF;
+    RETURN NEW;
+END;
+
+
+
+
+BEGIN
+    UPDATE oyuncu_istatistik
+    SET kart_sayisi = kart_sayisi + 1
+    WHERE oyuncu_id = NEW.oyuncu_id AND mac_id = NEW.mac_id;
+    RETURN NEW;
+END;
